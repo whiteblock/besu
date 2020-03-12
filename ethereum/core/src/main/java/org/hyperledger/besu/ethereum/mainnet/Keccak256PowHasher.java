@@ -14,18 +14,24 @@
  */
 package org.hyperledger.besu.ethereum.mainnet;
 
-import java.util.Arrays;
+public interface Keccak256PowHasher {
 
-public class EthHashSolverInputs implements SolverInputs{
-  @Override
-  public String toString() {
-    return "EthHashSolverInputs{"
-        + "target="
-        + target
-        + ", prePowHash="
-        + Arrays.toString(prePowHash)
-        + ", blockNumber="
-        + blockNumber
-        + '}';
+  /**
+   * @param buffer At least 64 bytes long buffer to store hash result in
+   * @param nonce Block Nonce
+   * @param number Block Number
+   * @param headerHash Block Header (without mix digest and nonce) Hash
+   */
+  void hash(byte[] buffer, long nonce, long number, byte[] headerHash);
+
+  final class Hasher implements Keccak256PowHasher {
+
+    @Override
+    public void hash(
+        final byte[] buffer, final long nonce, final long number, final byte[] headerHash) {
+      final byte[] hash =
+          Keccak256Pow.keccak256Pow(headerHash, nonce);
+      System.arraycopy(hash, 0, buffer, 0, hash.length);
+    }
   }
 }

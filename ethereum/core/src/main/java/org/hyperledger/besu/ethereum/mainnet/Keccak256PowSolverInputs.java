@@ -16,10 +16,10 @@ package org.hyperledger.besu.ethereum.mainnet;
 
 import java.util.Arrays;
 
-public class EthHashSolverInputs implements SolverInputs{
+public class Keccak256PowSolverInputs implements SolverInputs {
   @Override
   public String toString() {
-    return "EthHashSolverInputs{"
+    return "Keccak256PowSolverInputs{"
         + "target="
         + target
         + ", prePowHash="

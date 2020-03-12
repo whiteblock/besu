@@ -24,6 +24,8 @@ public interface GenesisConfigOptions {
 
   boolean isEthHash();
 
+  boolean isKeccak256Pow();
+
   boolean isIbftLegacy();
 
   boolean isIbft2();

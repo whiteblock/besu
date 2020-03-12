@@ -21,7 +21,7 @@ import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.core.Transaction;
 import org.hyperledger.besu.ethereum.core.Wei;
 import org.hyperledger.besu.ethereum.mainnet.EthHashSolution;
-import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
+import org.hyperledger.besu.ethereum.mainnet.SolverInputs;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +67,7 @@ public interface MiningCoordinator {
     return Optional.empty();
   }
 
-  default Optional<EthHashSolverInputs> getWorkDefinition() {
+  default Optional<SolverInputs> getWorkDefinition() {
     throw new UnsupportedOperationException(
         "Current consensus mechanism prevents querying work definition.");
   }

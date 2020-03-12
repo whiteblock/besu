@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Whiteblock Inc.
+ * Copyright ConsenSys AG.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,18 +14,31 @@
  */
 package org.hyperledger.besu.ethereum.mainnet;
 
-import java.util.Arrays;
+import org.apache.tuweni.units.bigints.UInt256;
 
-public class EthHashSolverInputs implements SolverInputs{
-  @Override
-  public String toString() {
-    return "EthHashSolverInputs{"
-        + "target="
-        + target
-        + ", prePowHash="
-        + Arrays.toString(prePowHash)
-        + ", blockNumber="
-        + blockNumber
-        + '}';
+public class SolverInputs {
+  private final UInt256 target;
+  private final byte[] prePowHash;
+  private final long blockNumber;
+
+  public SolverInputs(
+      final UInt256 target, final byte[] prePowHash, final long blockNumber) {
+    this.target = target;
+    this.prePowHash = prePowHash;
+    this.blockNumber = blockNumber;
   }
+
+  public UInt256 getTarget() {
+    return target;
+  }
+
+  public byte[] getPrePowHash() {
+    return prePowHash;
+  }
+
+  public long getBlockNumber() {
+    return blockNumber;
+  }
+
+  public String toString();
 }

@@ -87,6 +87,8 @@ public class JsonGenesisConfigOptions implements GenesisConfigOptions {
   public String getConsensusEngine() {
     if (isEthHash()) {
       return ETHASH_CONFIG_KEY;
+    } else if (isKeccak256Pow()) {
+      return KECCAK256POW_CONFIG_KEY;
     } else if (isIbft2()) {
       return IBFT2_CONFIG_KEY;
     } else if (isIbftLegacy()) {
@@ -101,6 +103,11 @@ public class JsonGenesisConfigOptions implements GenesisConfigOptions {
   @Override
   public boolean isEthHash() {
     return configRoot.has(ETHASH_CONFIG_KEY);
+  }
+
+  @Override
+  public boolean isKeccak256Pow() {
+    return configRoot.has(KECCAK256POW_CONFIG_KEY);
   }
 
   @Override
@@ -291,6 +298,9 @@ public class JsonGenesisConfigOptions implements GenesisConfigOptions {
     }
     if (isEthHash()) {
       builder.put("ethash", getEthashConfigOptions().asMap());
+    }
+    if (isKeccak256Pow()) {
+      builder.put("keccak256pow", getKeccak256PowConfigOptions().asMap());
     }
     if (isIbftLegacy()) {
       builder.put("ibft", getIbftLegacyConfigOptions().asMap());

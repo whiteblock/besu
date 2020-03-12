@@ -56,6 +56,11 @@ public class StubGenesisConfigOptions implements GenesisConfigOptions {
   }
 
   @Override
+  public boolean isKeccak256Pow() {
+    return true;
+  }
+
+  @Override
   public boolean isIbftLegacy() {
     return false;
   }
@@ -220,6 +225,9 @@ public class StubGenesisConfigOptions implements GenesisConfigOptions {
     }
     if (isEthHash()) {
       builder.put("ethash", getEthashConfigOptions().asMap());
+    }
+    if (isKeccak256Pow()) {
+      builder.put("keccak256pow", getEthashConfigOptions().asMap());
     }
     if (isIbftLegacy()) {
       builder.put("ibft", getIbftLegacyConfigOptions().asMap());
