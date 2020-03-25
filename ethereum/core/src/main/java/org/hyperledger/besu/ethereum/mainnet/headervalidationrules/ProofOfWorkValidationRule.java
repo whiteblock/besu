@@ -66,7 +66,7 @@ public final class ProofOfWorkValidationRule implements DetachedBlockHeaderValid
 
     if (HASHER instanceof EthHasher.Light) {
     final Hash mixedHash =
-      mixedHash = Hash.wrap(Bytes32.leftPad(Bytes.wrap(hashBuffer).slice(0, Bytes32.SIZE)));
+       Hash.wrap(Bytes32.leftPad(Bytes.wrap(hashBuffer).slice(0, Bytes32.SIZE)));
       if (!header.getMixHash().equals(mixedHash)) {
         LOG.warn(
             "Invalid block header: header mixed hash {} does not equal calculated mixed hash {}.\n"
