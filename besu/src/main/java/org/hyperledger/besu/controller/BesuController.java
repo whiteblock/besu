@@ -193,6 +193,9 @@ public class BesuController<C> implements java.io.Closeable {
 
       if (configOptions.isEthHash()) {
         builder = new MainnetBesuControllerBuilder();
+      } else if (config.Options.isKeccak256Pow()) {
+        build = new Keccak256PowBesuControllerBuilder();
+        org.hyperledger.besu.ethereum.mainnet.headervalidationrules.ProofOfWorkValidationRule.Hasher = new Keccak256PowHasher();
       } else if (configOptions.isIbft2()) {
         builder = new IbftBesuControllerBuilder();
       } else if (configOptions.isIbftLegacy()) {

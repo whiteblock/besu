@@ -32,6 +32,7 @@ import com.google.common.collect.ImmutableMap;
 public class JsonGenesisConfigOptions implements GenesisConfigOptions {
 
   private static final String ETHASH_CONFIG_KEY = "ethash";
+  private static final String KECCAK256POW_CONFIG_KEY = "keccak256pow";
   private static final String IBFT_LEGACY_CONFIG_KEY = "ibft";
   private static final String IBFT2_CONFIG_KEY = "ibft2";
   private static final String CLIQUE_CONFIG_KEY = "clique";
@@ -151,6 +152,13 @@ public class JsonGenesisConfigOptions implements GenesisConfigOptions {
     return JsonUtil.getObjectNode(configRoot, ETHASH_CONFIG_KEY)
         .map(EthashConfigOptions::new)
         .orElse(EthashConfigOptions.DEFAULT);
+  }
+
+  @Override
+  public Keccak256PowConfigOptions getKeccak256PowConfigOptions() {
+    return JsonUtil.getObjectNode(configRoot, KECCAK256POW_CONFIG_KEY)
+        .map(Keccak256PowConfigOptions::new)
+        .orElse(Keccak256PowConfigOptions.DEFAULT);
   }
 
   @Override
