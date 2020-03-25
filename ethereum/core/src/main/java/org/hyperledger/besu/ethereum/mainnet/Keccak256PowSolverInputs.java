@@ -19,7 +19,7 @@ import org.apache.tuweni.units.bigints.UInt256;
 
 public class Keccak256PowSolverInputs extends SolverInputs {
 
-  Keccak256PowSolverInputs(
+  public Keccak256PowSolverInputs(
       final UInt256 target, final byte[] prePowHash, final long blockNumber) {
     super(target, prePowHash, blockNumber);
   }

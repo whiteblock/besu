@@ -77,7 +77,7 @@ public class Keccak256PowBlockCreator extends AbstractBlockCreator<Void> {
     }
     return BlockHeaderBuilder.create()
         .populateFrom(sealableBlockHeader)
-        .mixHash(solution.getMixHash())
+//        .mixHash(solution.getMixHash())
         .nonce(solution.getNonce())
         .blockHeaderFunctions(blockHeaderFunctions)
         .buildBlockHeader();

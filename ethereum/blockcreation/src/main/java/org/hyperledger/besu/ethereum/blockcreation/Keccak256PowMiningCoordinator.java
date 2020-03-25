@@ -63,7 +63,7 @@ public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Voi
   }
 
   @Override
-  public Optional<Keccak256PowSolverInputs> getWorkDefinition() {
+  public Optional<SolverInputs> getWorkDefinition() {
     return currentRunningMiner.flatMap(Keccak256PowBlockMiner::getWorkDefinition);
   }
 
