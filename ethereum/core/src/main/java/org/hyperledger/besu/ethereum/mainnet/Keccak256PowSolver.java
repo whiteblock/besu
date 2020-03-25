@@ -135,9 +135,7 @@ public class Keccak256PowSolver {
     keccak256PowHasher.hash(hashBuffer, nonce, inputs.getBlockNumber(), inputs.getPrePowHash());
     final UInt256 x = UInt256.fromBytes(Bytes32.wrap(hashBuffer, 32));
     if (x.compareTo(inputs.getTarget()) <= 0) {
-      final Hash mixedHash =
-          Hash.wrap(Bytes32.leftPad(Bytes.wrap(hashBuffer).slice(0, Bytes32.SIZE)));
-      return Optional.of(new Keccak256PowSolution(nonce, mixedHash, inputs.getPrePowHash()));
+      return Optional.of(new Keccak256PowSolution(nonce, inputs.getPrePowHash()));
     }
     return Optional.empty();
   }
