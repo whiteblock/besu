@@ -40,6 +40,8 @@ public interface GenesisConfigOptions {
 
   IbftConfigOptions getIbft2ConfigOptions();
 
+  Keccak256PowConfigOptions getKeccak256PowConfigOptions();
+
   EthashConfigOptions getEthashConfigOptions();
 
   OptionalLong getHomesteadBlockNumber();

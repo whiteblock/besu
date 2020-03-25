@@ -76,6 +76,11 @@ public class StubGenesisConfigOptions implements GenesisConfigOptions {
   }
 
   @Override
+  public Keccak256PowConfigOptions getKeccak256PowConfigOptions() {
+    return Keccak256PowConfigOptions.DEFAULT;
+  }
+
+  @Override
   public IbftConfigOptions getIbftLegacyConfigOptions() {
     return IbftConfigOptions.DEFAULT;
   }

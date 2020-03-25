@@ -83,3 +83,4 @@ public final class Keccak256Pow {
     out.endList();
     return DirectAcyclicGraphSeed.KECCAK_256.get().digest(out.encoded().toArray());
   }
+}
