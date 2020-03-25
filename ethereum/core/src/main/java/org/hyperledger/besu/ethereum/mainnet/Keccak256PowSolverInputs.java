@@ -16,7 +16,7 @@ package org.hyperledger.besu.ethereum.mainnet;
 
 import java.util.Arrays;
 
-public class Keccak256PowSolverInputs implements SolverInputs {
+public class Keccak256PowSolverInputs extends SolverInputs {
   @Override
   public String toString() {
     return "Keccak256PowSolverInputs{"

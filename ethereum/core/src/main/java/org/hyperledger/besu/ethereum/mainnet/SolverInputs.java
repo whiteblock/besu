@@ -17,9 +17,9 @@ package org.hyperledger.besu.ethereum.mainnet;
 import org.apache.tuweni.units.bigints.UInt256;
 
 public class SolverInputs {
-  private final UInt256 target;
-  private final byte[] prePowHash;
-  private final long blockNumber;
+  protected final UInt256 target;
+  protected final byte[] prePowHash;
+  protected final long blockNumber;
 
   public SolverInputs(
       final UInt256 target, final byte[] prePowHash, final long blockNumber) {
@@ -40,5 +40,7 @@ public class SolverInputs {
     return blockNumber;
   }
 
-  public String toString();
+  public String toString() {
+    return "SolverInputs";
+  }
 }

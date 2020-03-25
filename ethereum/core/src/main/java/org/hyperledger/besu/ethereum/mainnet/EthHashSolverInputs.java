@@ -16,7 +16,7 @@ package org.hyperledger.besu.ethereum.mainnet;
 
 import java.util.Arrays;
 
-public class EthHashSolverInputs implements SolverInputs{
+public class EthHashSolverInputs extends SolverInputs{
   @Override
   public String toString() {
     return "EthHashSolverInputs{"
