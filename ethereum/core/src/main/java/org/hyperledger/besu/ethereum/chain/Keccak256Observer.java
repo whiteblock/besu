@@ -27,7 +27,7 @@ public interface Keccak256Observer {
    *
    * @param jobInput the proof-of-work job
    */
-  void newJob(Keccak256SolverInputs jobInput);
+  void newJob(Keccak256PowSolverInputs jobInput);
 
   /**
    * Sets a callback for the observer to provide solutions to jobs.
