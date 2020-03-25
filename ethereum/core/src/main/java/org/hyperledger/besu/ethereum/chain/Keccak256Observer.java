@@ -15,7 +15,7 @@
 package org.hyperledger.besu.ethereum.chain;
 
 import org.hyperledger.besu.ethereum.mainnet.Keccak256Solution;
-import org.hyperledger.besu.ethereum.mainnet.Keccak256SolverInputs;
+import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
 
 import java.util.function.Function;
 
