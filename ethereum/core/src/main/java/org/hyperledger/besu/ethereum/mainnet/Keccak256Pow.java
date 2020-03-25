@@ -50,13 +50,7 @@ public final class Keccak256Pow {
     final MessageDigest keccak256 = KECCAK_256.get();
     keccak256.update(header);
     keccak256.update(Longs.toByteArray(Long.reverseBytes(nonce)));
-    byte[] result;
-    try {
-      result = keccak256.digest();
-    } catch (final DigestException ex) {
-      throw new IllegalStateException(ex);
-    }
-    return result;
+    return keccak256.digest();
   }
 
   /**
