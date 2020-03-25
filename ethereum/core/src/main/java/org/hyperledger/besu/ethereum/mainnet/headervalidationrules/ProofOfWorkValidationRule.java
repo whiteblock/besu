@@ -17,7 +17,6 @@ package org.hyperledger.besu.ethereum.mainnet.headervalidationrules;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.core.Hash;
 import org.hyperledger.besu.ethereum.mainnet.DetachedBlockHeaderValidationRule;
-import org.hyperledger.besu.ethereum.mainnet.EthHash;
 import org.hyperledger.besu.ethereum.mainnet.EthHasher;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowHasher;
 import org.hyperledger.besu.ethereum.rlp.BytesValueRLPOutput;
@@ -64,8 +63,9 @@ public final class ProofOfWorkValidationRule implements DetachedBlockHeaderValid
       return false;
     }
 
-    final Hash mixedHash;
-    if (HASHER instanceof EthHash.Light) {
+
+    if (HASHER instanceof EthHasher.Light) {
+    final Hash mixedHash =
       mixedHash = Hash.wrap(Bytes32.leftPad(Bytes.wrap(hashBuffer).slice(0, Bytes32.SIZE)));
       if (!header.getMixHash().equals(mixedHash)) {
         LOG.warn(
