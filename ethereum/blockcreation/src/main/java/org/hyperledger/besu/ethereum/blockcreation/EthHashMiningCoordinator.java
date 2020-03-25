@@ -21,6 +21,7 @@ import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.eth.sync.state.SyncState;
 import org.hyperledger.besu.ethereum.mainnet.EthHashSolution;
 import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
+import org.hyperledger.besu.ethereum.mainnet.SolverInputs;
 
 import java.util.Optional;
 
@@ -63,7 +64,7 @@ public class EthHashMiningCoordinator extends AbstractMiningCoordinator<Void, Et
   }
 
   @Override
-  public Optional<EthHashSolverInputs> getWorkDefinition() {
+  public Optional<SolverInputs> getWorkDefinition() {
     return currentRunningMiner.flatMap(EthHashBlockMiner::getWorkDefinition);
   }
 

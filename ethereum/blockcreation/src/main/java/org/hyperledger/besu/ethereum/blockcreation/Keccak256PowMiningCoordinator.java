@@ -21,6 +21,7 @@ import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.eth.sync.state.SyncState;
 import org.hyperledger.besu.ethereum.mainnet.EthHashSolution;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
+import org.hyperledger.besu.ethereum.mainnet.SolverInputs;
 
 import java.util.Optional;
 
