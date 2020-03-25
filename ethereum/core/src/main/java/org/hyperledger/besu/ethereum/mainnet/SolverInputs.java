@@ -40,6 +40,7 @@ public class SolverInputs {
     return blockNumber;
   }
 
+  @Override
   public String toString() {
     return "SolverInputs";
   }
