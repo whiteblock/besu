@@ -16,7 +16,7 @@ package org.hyperledger.besu.ethereum.mainnet;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import org.hyperledger.besu.ethereum.chain.EthHashObserver;
+import org.hyperledger.besu.ethereum.chain.Keccak256Observer;
 import org.hyperledger.besu.ethereum.core.Hash;
 import org.hyperledger.besu.util.Subscribers;
 
@@ -82,14 +82,14 @@ public class Keccak256PowSolver {
   private final Keccak256PowHasher keccak256PowHasher;
   private volatile long hashesPerSecond = NO_MINING_CONDUCTED;
   private final Boolean stratumMiningEnabled;
-  private final Subscribers<EthHashObserver> ethHashObservers;
+  private final Subscribers<Keccak256Observer> ethHashObservers;
   private volatile Optional<Keccak256PowSolverJob> currentJob = Optional.empty();
 
   public Keccak256PowSolver(
       final Iterable<Long> nonceGenerator,
       final Keccak256PowHasher keccak256PowHasher,
       final Boolean stratumMiningEnabled,
-      final Subscribers<EthHashObserver> ethHashObservers) {
+      final Subscribers<Keccak256Observer> ethHashObservers) {
     this.nonceGenerator = nonceGenerator;
     this.keccak256PowHasher = keccak256PowHasher;
     this.stratumMiningEnabled = stratumMiningEnabled;
