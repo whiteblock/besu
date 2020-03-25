@@ -15,8 +15,14 @@
 package org.hyperledger.besu.ethereum.mainnet;
 
 import java.util.Arrays;
+import org.apache.tuweni.units.bigints.UInt256;
 
 public class EthHashSolverInputs extends SolverInputs{
+
+   EthHashSolverInputs(
+      final UInt256 target, final byte[] prePowHash, final long blockNumber) {
+    super(target, prePowHash, blockNumber);
+  }
   @Override
   public String toString() {
     return "EthHashSolverInputs{"
