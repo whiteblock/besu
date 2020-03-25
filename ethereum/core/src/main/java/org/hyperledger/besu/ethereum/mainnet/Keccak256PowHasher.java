@@ -24,7 +24,7 @@ public interface Keccak256PowHasher {
    */
   void hash(byte[] buffer, long nonce, long number, byte[] headerHash);
 
-  final class Hasher implements Keccak256PowHasher {
+  final class Hasher implements Keccak256PowHasher, EthHasher {
 
     @Override
     public void hash(

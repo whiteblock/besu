@@ -63,6 +63,8 @@ public final class ProofOfWorkValidationRule implements DetachedBlockHeaderValid
       return false;
     }
 
+
+    if (HASHER instanceof EthHash.Light) {
     final Hash mixedHash =
       mixedHash = Hash.wrap(Bytes32.leftPad(Bytes.wrap(hashBuffer).slice(0, Bytes32.SIZE)));
       if (!header.getMixHash().equals(mixedHash)) {
@@ -74,6 +76,7 @@ public final class ProofOfWorkValidationRule implements DetachedBlockHeaderValid
             header);
         return false;
       }
+    }
 
     return true;
   }
