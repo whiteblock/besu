@@ -14,7 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.chain;
 
-import org.hyperledger.besu.ethereum.mainnet.Keccak256Solution;
+import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolution;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
 
 import java.util.function.Function;
@@ -35,5 +35,5 @@ public interface Keccak256Observer {
    * @param submitSolutionCallback the callback to set on the observer, consuming a solution and
    *     returning true if the solution is accepted, false if rejected.
    */
-  void setSubmitWorkCallback(Function<Keccak256Solution, Boolean> submitSolutionCallback);
+  void setSubmitWorkCallback(Function<Keccak256PowSolution, Boolean> submitSolutionCallback);
 }
