@@ -16,8 +16,8 @@ package org.hyperledger.besu.ethereum.mainnet;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import org.hyperledger.besu.ethereum.chain.Keccak256Observer;
-import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolution;
+import org.hyperledger.besu.ethereum.chain.Keccak256PowObserver;
+import org.hyperledger.besu.ethereum.mainnet.PowSolution;
 import org.hyperledger.besu.ethereum.core.Hash;
 import org.hyperledger.besu.util.Subscribers;
 
@@ -40,10 +40,10 @@ public class Keccak256PowSolver {
   public static class Keccak256PowSolverJob {
 
     private final Keccak256PowSolverInputs inputs;
-    private final CompletableFuture<Keccak256PowSolution> nonceFuture;
+    private final CompletableFuture<PowSolution> nonceFuture;
 
     Keccak256PowSolverJob(
-        final Keccak256PowSolverInputs inputs, final CompletableFuture<Keccak256PowSolution> nonceFuture) {
+        final Keccak256PowSolverInputs inputs, final CompletableFuture<PowSolution> nonceFuture) {
       this.inputs = inputs;
       this.nonceFuture = nonceFuture;
     }
@@ -60,7 +60,7 @@ public class Keccak256PowSolver {
       return nonceFuture.isDone();
     }
 
-    void solvedWith(final Keccak256PowSolution solution) {
+    void solvedWith(final PowSolution solution) {
       nonceFuture.complete(solution);
     }
 
@@ -72,7 +72,7 @@ public class Keccak256PowSolver {
       nonceFuture.completeExceptionally(ex);
     }
 
-    Keccak256PowSolution getSolution() throws InterruptedException, ExecutionException {
+    PowSolution getSolution() throws InterruptedException, ExecutionException {
       return nonceFuture.get();
     }
   }
@@ -83,14 +83,14 @@ public class Keccak256PowSolver {
   private final Keccak256PowHasher keccak256PowHasher;
   private volatile long hashesPerSecond = NO_MINING_CONDUCTED;
   private final Boolean stratumMiningEnabled;
-  private final Subscribers<Keccak256Observer> ethHashObservers;
+  private final Subscribers<Keccak256PowObserver> ethHashObservers;
   private volatile Optional<Keccak256PowSolverJob> currentJob = Optional.empty();
 
   public Keccak256PowSolver(
       final Iterable<Long> nonceGenerator,
       final Keccak256PowHasher keccak256PowHasher,
       final Boolean stratumMiningEnabled,
-      final Subscribers<Keccak256Observer> ethHashObservers) {
+      final Subscribers<Keccak256PowObserver> ethHashObservers) {
     this.nonceGenerator = nonceGenerator;
     this.keccak256PowHasher = keccak256PowHasher;
     this.stratumMiningEnabled = stratumMiningEnabled;
@@ -98,7 +98,7 @@ public class Keccak256PowSolver {
     ethHashObservers.forEach(observer -> observer.setSubmitWorkCallback(this::submitSolution));
   }
 
-  public Keccak256PowSolution solveFor(final Keccak256PowSolverJob job)
+  public PowSolution solveFor(final Keccak256PowSolverJob job)
       throws InterruptedException, ExecutionException {
     currentJob = Optional.of(job);
     if (stratumMiningEnabled) {
@@ -120,7 +120,7 @@ public class Keccak256PowSolver {
         return;
       }
 
-      final Optional<Keccak256PowSolution> solution = testNonce(job.getInputs(), n, hashBuffer);
+      final Optional<PowSolution> solution = testNonce(job.getInputs(), n, hashBuffer);
       solution.ifPresent(job::solvedWith);
 
       hashesExecuted++;
@@ -130,12 +130,12 @@ public class Keccak256PowSolver {
     job.failed(new IllegalStateException("No valid nonce found."));
   }
 
-  private Optional<Keccak256PowSolution> testNonce(
+  private Optional<PowSolution> testNonce(
       final Keccak256PowSolverInputs inputs, final long nonce, final byte[] hashBuffer) {
     keccak256PowHasher.hash(hashBuffer, nonce, inputs.getBlockNumber(), inputs.getPrePowHash());
     final UInt256 x = UInt256.fromBytes(Bytes32.wrap(hashBuffer, 32));
     if (x.compareTo(inputs.getTarget()) <= 0) {
-      return Optional.of(new Keccak256PowSolution(nonce, inputs.getPrePowHash()));
+      return Optional.of(new PowSolution(nonce, inputs.getPrePowHash()));
     }
     return Optional.empty();
   }
@@ -155,7 +155,7 @@ public class Keccak256PowSolver {
     return Optional.of(hashesPerSecond);
   }
 
-  public boolean submitSolution(final Keccak256PowSolution solution) {
+  public boolean submitSolution(final PowSolution solution) {
     final Optional<Keccak256PowSolverJob> jobSnapshot = currentJob;
     if (jobSnapshot.isEmpty()) {
       LOG.debug("No current job, rejecting miner work");
@@ -169,7 +169,7 @@ public class Keccak256PowSolver {
       return false;
     }
     final byte[] hashBuffer = new byte[64];
-    final Optional<Keccak256PowSolution> calculatedSolution =
+    final Optional<PowSolution> calculatedSolution =
         testNonce(inputs, solution.getNonce(), hashBuffer);
 
     if (calculatedSolution.isPresent()) {

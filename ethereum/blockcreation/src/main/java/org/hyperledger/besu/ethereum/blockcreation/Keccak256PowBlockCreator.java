@@ -22,7 +22,7 @@ import org.hyperledger.besu.ethereum.core.SealableBlockHeader;
 import org.hyperledger.besu.ethereum.core.Wei;
 import org.hyperledger.besu.ethereum.eth.transactions.PendingTransactions;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256Pow;
-import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolution;
+import org.hyperledger.besu.ethereum.mainnet.PowSolution;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolver;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
@@ -66,7 +66,7 @@ public class Keccak256PowBlockCreator extends AbstractBlockCreator<Void> {
   @Override
   protected BlockHeader createFinalBlockHeader(final SealableBlockHeader sealableBlockHeader) {
     final Keccak256PowSolverInputs workDefinition = generateNonceSolverInputs(sealableBlockHeader);
-    final Keccak256PowSolution solution;
+    final PowSolution solution;
     try {
       solution =
           nonceSolver.solveFor(Keccak256PowSolver.Keccak256PowSolverJob.createFromInputs(workDefinition));
@@ -103,7 +103,7 @@ public class Keccak256PowBlockCreator extends AbstractBlockCreator<Void> {
     return nonceSolver.hashesPerSecond();
   }
 
-  public boolean submitWork(final Keccak256PowSolution solution) {
+  public boolean submitWork(final PowSolution solution) {
     return nonceSolver.submitSolution(solution);
   }
 

@@ -15,14 +15,14 @@
 package org.hyperledger.besu.ethereum.blockcreation;
 
 import org.hyperledger.besu.ethereum.ProtocolContext;
-import org.hyperledger.besu.ethereum.chain.EthHashObserver;
+import org.hyperledger.besu.ethereum.chain.Keccak256PowObserver;
 import org.hyperledger.besu.ethereum.chain.MinedBlockObserver;
 import org.hyperledger.besu.ethereum.core.Address;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.core.MiningParameters;
 import org.hyperledger.besu.ethereum.eth.transactions.PendingTransactions;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolver;
-import org.hyperledger.besu.ethereum.mainnet.Keccak256Pow;
+import org.hyperledger.besu.ethereum.mainnet.Keccak256PowHasher;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.util.Subscribers;
 
@@ -54,7 +54,7 @@ public class Keccak256PowMinerExecutor extends AbstractMinerExecutor<Void, Kecca
   @Override
   public Optional<Keccak256PowBlockMiner> startAsyncMining(
       final Subscribers<MinedBlockObserver> observers,
-      final Subscribers<EthHashObserver> ethHashObservers,
+      final Subscribers<Keccak256PowObserver> ethHashObservers,
       final BlockHeader parentHeader) {
     if (!coinbase.isPresent()) {
       throw new CoinbaseNotSetException("Unable to start mining without a coinbase.");
@@ -65,12 +65,12 @@ public class Keccak256PowMinerExecutor extends AbstractMinerExecutor<Void, Kecca
   @Override
   public Keccak256PowBlockMiner createMiner(
       final Subscribers<MinedBlockObserver> observers,
-      final Subscribers<EthHashObserver> ethHashObservers,
+      final Subscribers<Keccak256PowObserver> ethHashObservers,
       final BlockHeader parentHeader) {
     final Keccak256PowSolver solver =
         new Keccak256PowSolver(
             new RandomNonceGenerator(),
-            new Keccak256Pow.keccak256Pow(),
+            new Keccak256PowHasher.Hasher(),
             stratumMiningEnabled,
             ethHashObservers);
     final Function<BlockHeader, Keccak256PowBlockCreator> blockCreator =

@@ -17,7 +17,7 @@ package org.hyperledger.besu.ethereum.blockcreation;
 import org.hyperledger.besu.ethereum.ProtocolContext;
 import org.hyperledger.besu.ethereum.chain.MinedBlockObserver;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
-import org.hyperledger.besu.ethereum.mainnet.EthHashSolution;
+import org.hyperledger.besu.ethereum.mainnet.PowSolution;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.util.Subscribers;
@@ -52,7 +52,7 @@ public class Keccak256PowBlockMiner extends BlockMiner<Void, Keccak256PowBlockCr
     return minerBlockCreator.getHashesPerSecond();
   }
 
-  public boolean submitWork(final EthHashSolution solution) {
+  public boolean submitWork(final PowSolution solution) {
     return minerBlockCreator.submitWork(solution);
   }
 }

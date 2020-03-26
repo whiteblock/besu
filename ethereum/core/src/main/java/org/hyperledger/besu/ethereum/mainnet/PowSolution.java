@@ -19,11 +19,11 @@ import org.hyperledger.besu.ethereum.core.Hash;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Keccak256PowSolution {
-  private final long nonce;
-  private final byte[] powHash;
+public class PowSolution {
+  final long nonce;
+  final byte[] powHash;
 
-  public Keccak256PowSolution(final long nonce, final byte[] powHash) {
+  public PowSolution(final long nonce, final byte[] powHash) {
     this.nonce = nonce;
     this.powHash = powHash;
   }
@@ -40,7 +40,7 @@ public class Keccak256PowSolution {
   public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Keccak256PowSolution that = (Keccak256PowSolution) o;
+    PowSolution that = (PowSolution) o;
     return nonce == that.nonce
         && Arrays.equals(powHash, that.powHash);
   }

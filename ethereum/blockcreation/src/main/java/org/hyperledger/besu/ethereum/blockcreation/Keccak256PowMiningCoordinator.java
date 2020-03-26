@@ -19,7 +19,7 @@ import org.hyperledger.besu.ethereum.chain.Blockchain;
 import org.hyperledger.besu.ethereum.core.Address;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.eth.sync.state.SyncState;
-import org.hyperledger.besu.ethereum.mainnet.EthHashSolution;
+import org.hyperledger.besu.ethereum.mainnet.PowSolution;
 import org.hyperledger.besu.ethereum.mainnet.Keccak256PowSolverInputs;
 import org.hyperledger.besu.ethereum.mainnet.SolverInputs;
 
@@ -32,11 +32,11 @@ import java.util.Optional;
 public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Void, Keccak256PowBlockMiner>
     implements BlockAddedObserver {
 
-  private final EthHashMinerExecutor executor;
+  private final Keccak256PowMinerExecutor executor;
   private volatile Optional<Long> cachedHashesPerSecond = Optional.empty();
 
   public Keccak256PowMiningCoordinator(
-      final Blockchain blockchain, final EthHashMinerExecutor executor, final SyncState syncState) {
+      final Blockchain blockchain, final Keccak256PowMinerExecutor executor, final SyncState syncState) {
     super(blockchain, executor, syncState);
     this.executor = executor;
   }
@@ -68,8 +68,7 @@ public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Voi
     return currentRunningMiner.flatMap(Keccak256PowBlockMiner::getWorkDefinition);
   }
 
-  @Override
-  public boolean submitWork(final EthHashSolution solution) {
+  public boolean submitWork(final PowSolution solution) {
     synchronized (this) {
       return currentRunningMiner.map(miner -> miner.submitWork(solution)).orElse(false);
     }
