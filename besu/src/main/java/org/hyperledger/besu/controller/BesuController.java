@@ -31,6 +31,7 @@ import org.hyperledger.besu.ethereum.eth.sync.state.SyncState;
 import org.hyperledger.besu.ethereum.eth.transactions.TransactionPool;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.ethereum.p2p.config.SubProtocolConfiguration;
+import org.hyperledger.besu.ethereum.mainnet.Keccak256PowHasher;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -195,7 +196,7 @@ public class BesuController<C> implements java.io.Closeable {
         builder = new MainnetBesuControllerBuilder();
       } else if (configOptions.isKeccak256Pow()) {
         builder = new Keccak256PowBesuControllerBuilder();
-        org.hyperledger.besu.ethereum.mainnet.headervalidationrules.ProofOfWorkValidationRule.Hasher = new Keccak256PowHasher();
+        org.hyperledger.besu.ethereum.mainnet.headervalidationrules.ProofOfWorkValidationRule.HASHER = new Keccak256PowHasher.Hasher();
       } else if (configOptions.isIbft2()) {
         builder = new IbftBesuControllerBuilder();
       } else if (configOptions.isIbftLegacy()) {

@@ -35,7 +35,7 @@ public final class ProofOfWorkValidationRule implements DetachedBlockHeaderValid
 
   private static final BigInteger ETHASH_TARGET_UPPER_BOUND = BigInteger.valueOf(2).pow(256);
 
-  static EthHasher HASHER = new EthHasher.Light();
+  public static EthHasher HASHER = new EthHasher.Light();
 
   @Override
   public boolean validate(final BlockHeader header, final BlockHeader parent) {

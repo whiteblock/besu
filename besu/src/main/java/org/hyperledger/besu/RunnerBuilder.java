@@ -382,7 +382,7 @@ public class RunnerBuilder {
                 new InsufficientPeersPermissioningProvider(network, bootnodes)));
 
     final TransactionPool transactionPool = besuController.getTransactionPool();
-    final MiningCoordinator miningCoordinator = besuController.getMiningCoordinator();
+    final MiningCoordinator<?> miningCoordinator = besuController.getMiningCoordinator();
 
     final BlockchainQueries blockchainQueries =
         new BlockchainQueries(
@@ -641,7 +641,7 @@ public class RunnerBuilder {
       final BlockchainQueries blockchainQueries,
       final Synchronizer synchronizer,
       final TransactionPool transactionPool,
-      final MiningCoordinator miningCoordinator,
+      final MiningCoordinator<?> miningCoordinator,
       final ObservableMetricsSystem metricsSystem,
       final Set<Capability> supportedCapabilities,
       final Collection<RpcApi> jsonRpcApis,
