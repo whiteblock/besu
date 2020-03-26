@@ -29,7 +29,7 @@ import org.hyperledger.besu.util.Subscribers;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class Keccak256PowMinerExecutor extends AbstractMinerExecutor<Void, Keccak256PowBlockMiner> {
+public class Keccak256PowMinerExecutor extends AbstractMinerExecutor<Void, Keccak256PowBlockMiner, Keccak256PowObserver> {
 
   private volatile Optional<Address> coinbase;
   private boolean stratumMiningEnabled;

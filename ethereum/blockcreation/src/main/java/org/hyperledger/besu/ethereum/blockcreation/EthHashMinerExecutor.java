@@ -25,11 +25,13 @@ import org.hyperledger.besu.ethereum.mainnet.EthHashSolver;
 import org.hyperledger.besu.ethereum.mainnet.EthHasher;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.util.Subscribers;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-public class EthHashMinerExecutor extends AbstractMinerExecutor<Void, EthHashBlockMiner> {
+public class EthHashMinerExecutor extends AbstractMinerExecutor<Void, EthHashBlockMiner, 
+    EthHashObserver> {
 
   private volatile Optional<Address> coinbase;
   private boolean stratumMiningEnabled;

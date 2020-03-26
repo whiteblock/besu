@@ -22,14 +22,15 @@ import org.hyperledger.besu.ethereum.api.jsonrpc.internal.response.JsonRpcRespon
 import org.hyperledger.besu.ethereum.api.jsonrpc.internal.response.JsonRpcSuccessResponse;
 import org.hyperledger.besu.ethereum.blockcreation.MiningCoordinator;
 import org.hyperledger.besu.ethereum.core.Address;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.util.Optional;
 
 public class EthCoinbase implements JsonRpcMethod {
 
-  private final MiningCoordinator miningCoordinator;
+  private final MiningCoordinator<EthHashSolverInputs> miningCoordinator;
 
-  public EthCoinbase(final MiningCoordinator miningCoordinator) {
+  public EthCoinbase(final MiningCoordinator<EthHashSolverInputs> miningCoordinator) {
     this.miningCoordinator = miningCoordinator;
   }
 

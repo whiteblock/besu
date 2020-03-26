@@ -69,6 +69,7 @@ import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.ethereum.p2p.config.SubProtocolConfiguration;
 import org.hyperledger.besu.ethereum.worldstate.WorldStateArchive;
 import org.hyperledger.besu.util.Subscribers;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.util.HashMap;
 import java.util.List;
@@ -107,7 +108,7 @@ public class IbftBesuControllerBuilder extends BesuControllerBuilder<IbftContext
   }
 
   @Override
-  protected MiningCoordinator createMiningCoordinator(
+  protected MiningCoordinator<EthHashSolverInputs> createMiningCoordinator(
       final ProtocolSchedule<IbftContext> protocolSchedule,
       final ProtocolContext<IbftContext> protocolContext,
       final TransactionPool transactionPool,
@@ -189,7 +190,7 @@ public class IbftBesuControllerBuilder extends BesuControllerBuilder<IbftContext
     final EventMultiplexer eventMultiplexer = new EventMultiplexer(ibftController);
     final IbftProcessor ibftProcessor = new IbftProcessor(ibftEventQueue, eventMultiplexer);
 
-    final MiningCoordinator ibftMiningCoordinator =
+    final MiningCoordinator<EthHashSolverInputs> ibftMiningCoordinator =
         new IbftMiningCoordinator(
             ibftExecutors,
             ibftController,

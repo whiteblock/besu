@@ -15,6 +15,7 @@
 package org.hyperledger.besu.ethereum.blockcreation;
 
 import org.hyperledger.besu.ethereum.chain.BlockAddedObserver;
+import org.hyperledger.besu.ethereum.chain.Keccak256PowObserver;
 import org.hyperledger.besu.ethereum.chain.Blockchain;
 import org.hyperledger.besu.ethereum.core.Address;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
@@ -29,7 +30,7 @@ import java.util.Optional;
  * Responsible for determining when a block mining operation should be started/stopped, then
  * creating an appropriate miner and starting it running in a thread.
  */
-public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Void, Keccak256PowBlockMiner>
+public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Void, Keccak256PowBlockMiner, Keccak256PowObserver, Keccak256PowSolverInputs>
     implements BlockAddedObserver {
 
   private final Keccak256PowMinerExecutor executor;
@@ -64,7 +65,7 @@ public class Keccak256PowMiningCoordinator extends AbstractMiningCoordinator<Voi
   }
 
   @Override
-  public Optional<SolverInputs> getWorkDefinition() {
+  public Optional<Keccak256PowSolverInputs> getWorkDefinition() {
     return currentRunningMiner.flatMap(Keccak256PowBlockMiner::getWorkDefinition);
   }
 

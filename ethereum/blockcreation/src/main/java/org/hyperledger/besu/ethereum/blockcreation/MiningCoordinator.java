@@ -28,7 +28,7 @@ import java.util.Optional;
 
 import org.apache.tuweni.bytes.Bytes;
 
-public interface MiningCoordinator {
+public interface MiningCoordinator<SI> {
 
   void start();
 
@@ -67,7 +67,7 @@ public interface MiningCoordinator {
     return Optional.empty();
   }
 
-  default Optional<SolverInputs> getWorkDefinition() {
+  default Optional<SI> getWorkDefinition() {
     throw new UnsupportedOperationException(
         "Current consensus mechanism prevents querying work definition.");
   }

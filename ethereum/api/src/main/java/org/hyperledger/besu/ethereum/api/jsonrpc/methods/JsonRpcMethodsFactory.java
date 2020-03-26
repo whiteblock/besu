@@ -35,6 +35,7 @@ import org.hyperledger.besu.metrics.ObservableMetricsSystem;
 import org.hyperledger.besu.metrics.prometheus.MetricsConfiguration;
 import org.hyperledger.besu.nat.NatService;
 import org.hyperledger.besu.plugin.BesuPlugin;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.math.BigInteger;
 import java.util.Collection;
@@ -56,7 +57,7 @@ public class JsonRpcMethodsFactory {
       final ProtocolSchedule<?> protocolSchedule,
       final FilterManager filterManager,
       final TransactionPool transactionPool,
-      final MiningCoordinator miningCoordinator,
+      final MiningCoordinator<EthHashSolverInputs> miningCoordinator,
       final ObservableMetricsSystem metricsSystem,
       final Set<Capability> supportedCapabilities,
       final Optional<AccountLocalConfigPermissioningController> accountsWhitelistController,

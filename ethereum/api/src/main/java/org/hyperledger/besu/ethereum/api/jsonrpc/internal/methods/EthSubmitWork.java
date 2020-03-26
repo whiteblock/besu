@@ -34,10 +34,10 @@ import org.apache.tuweni.bytes.Bytes;
 
 public class EthSubmitWork implements JsonRpcMethod {
 
-  private final MiningCoordinator miner;
+  private final MiningCoordinator<EthHashSolverInputs> miner;
   private static final Logger LOG = getLogger();
 
-  public EthSubmitWork(final MiningCoordinator miner) {
+  public EthSubmitWork(final MiningCoordinator<EthHashSolverInputs> miner) {
     this.miner = miner;
   }
 

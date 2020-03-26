@@ -15,6 +15,7 @@
 package org.hyperledger.besu.ethereum.blockcreation;
 
 import org.hyperledger.besu.ethereum.chain.BlockAddedObserver;
+import org.hyperledger.besu.ethereum.chain.EthHashObserver;
 import org.hyperledger.besu.ethereum.chain.Blockchain;
 import org.hyperledger.besu.ethereum.core.Address;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
@@ -29,7 +30,8 @@ import java.util.Optional;
  * Responsible for determining when a block mining operation should be started/stopped, then
  * creating an appropriate miner and starting it running in a thread.
  */
-public class EthHashMiningCoordinator extends AbstractMiningCoordinator<Void, EthHashBlockMiner>
+public class EthHashMiningCoordinator extends AbstractMiningCoordinator<Void, EthHashBlockMiner,
+    EthHashObserver, EthHashSolverInputs>
     implements BlockAddedObserver {
 
   private final EthHashMinerExecutor executor;
@@ -64,7 +66,7 @@ public class EthHashMiningCoordinator extends AbstractMiningCoordinator<Void, Et
   }
 
   @Override
-  public Optional<SolverInputs> getWorkDefinition() {
+  public Optional<EthHashSolverInputs> getWorkDefinition() {
     return currentRunningMiner.flatMap(EthHashBlockMiner::getWorkDefinition);
   }
 

@@ -38,7 +38,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.tuweni.bytes.Bytes;
 
 public abstract class AbstractMinerExecutor<
-    C, M extends BlockMiner<C, ? extends AbstractBlockCreator<C>>> {
+    C, M extends BlockMiner<C, ? extends AbstractBlockCreator<C>>, O> {
 
   private static final Logger LOG = LogManager.getLogger();
 
@@ -72,7 +72,7 @@ public abstract class AbstractMinerExecutor<
 
   public Optional<M> startAsyncMining(
       final Subscribers<MinedBlockObserver> observers,
-      final Subscribers<EthHashObserver> ethHashObservers,
+      final Subscribers<O> ethHashObservers,
       final BlockHeader parentHeader) {
     try {
       final M currentRunningMiner = createMiner(observers, ethHashObservers, parentHeader);
@@ -98,7 +98,7 @@ public abstract class AbstractMinerExecutor<
 
   public abstract M createMiner(
       final Subscribers<MinedBlockObserver> subscribers,
-      final Subscribers<EthHashObserver> ethHashObservers,
+      final Subscribers<O> ethHashObservers,
       final BlockHeader parentHeader);
 
   public void setExtraData(final Bytes extraData) {

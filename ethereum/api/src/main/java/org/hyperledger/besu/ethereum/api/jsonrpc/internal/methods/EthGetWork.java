@@ -33,10 +33,10 @@ import org.apache.logging.log4j.Logger;
 
 public class EthGetWork implements JsonRpcMethod {
 
-  private final MiningCoordinator miner;
+  private final MiningCoordinator<EthHashSolverInputs> miner;
   private static final Logger LOG = getLogger();
 
-  public EthGetWork(final MiningCoordinator miner) {
+  public EthGetWork(final MiningCoordinator<EthHashSolverInputs> miner) {
     this.miner = miner;
   }
 

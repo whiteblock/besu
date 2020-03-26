@@ -32,6 +32,8 @@ import org.hyperledger.besu.ethereum.core.Util;
 import org.hyperledger.besu.ethereum.eth.transactions.PendingTransactions;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.util.Subscribers;
+import org.hyperledger.besu.ethereum.chain.EthHashObserver;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +43,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import org.apache.tuweni.bytes.Bytes;
 
-public class CliqueMinerExecutor extends AbstractMinerExecutor<CliqueContext, CliqueBlockMiner> {
+public class CliqueMinerExecutor extends AbstractMinerExecutor<CliqueContext, CliqueBlockMiner, EthHashObserver> {
 
   private final Address localAddress;
   private final KeyPair nodeKeys;

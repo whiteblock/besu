@@ -19,11 +19,12 @@ import org.hyperledger.besu.ethereum.blockcreation.MiningCoordinator;
 import org.hyperledger.besu.ethereum.core.Synchronizer;
 import org.hyperledger.besu.ethereum.eth.transactions.TransactionPool;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 public class GraphQLDataFetcherContext {
 
   private final BlockchainQueries blockchainQueries;
-  private final MiningCoordinator miningCoordinator;
+  private final MiningCoordinator<EthHashSolverInputs> miningCoordinator;
   private final Synchronizer synchronizer;
   private final ProtocolSchedule<?> protocolSchedule;
   private final TransactionPool transactionPool;
@@ -32,7 +33,7 @@ public class GraphQLDataFetcherContext {
       final BlockchainQueries blockchainQueries,
       final ProtocolSchedule<?> protocolSchedule,
       final TransactionPool transactionPool,
-      final MiningCoordinator miningCoordinator,
+      final MiningCoordinator<EthHashSolverInputs> miningCoordinator,
       final Synchronizer synchronizer) {
     this.blockchainQueries = blockchainQueries;
     this.protocolSchedule = protocolSchedule;
@@ -49,7 +50,7 @@ public class GraphQLDataFetcherContext {
     return blockchainQueries;
   }
 
-  public MiningCoordinator getMiningCoordinator() {
+  public MiningCoordinator<EthHashSolverInputs> getMiningCoordinator() {
     return miningCoordinator;
   }
 

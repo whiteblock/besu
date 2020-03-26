@@ -37,8 +37,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.tuweni.bytes.Bytes;
 
 public abstract class AbstractMiningCoordinator<
-        C, M extends BlockMiner<C, ? extends AbstractBlockCreator<C>>>
-    implements BlockAddedObserver, MiningCoordinator {
+        C, M extends BlockMiner<C, ? extends AbstractBlockCreator<C>>, O, SI>
+    implements BlockAddedObserver, MiningCoordinator<SI> {
 
   private enum State {
     IDLE,
@@ -49,8 +49,8 @@ public abstract class AbstractMiningCoordinator<
   private static final Logger LOG = getLogger();
 
   private final Subscribers<MinedBlockObserver> minedBlockObservers = Subscribers.create();
-  private final Subscribers<EthHashObserver> ethHashObservers = Subscribers.create();
-  private final AbstractMinerExecutor<C, M> executor;
+  private final Subscribers<O> ethHashObservers = Subscribers.create();
+  private final AbstractMinerExecutor<C, M, O> executor;
   private final SyncState syncState;
   private final Blockchain blockchain;
 
@@ -60,7 +60,7 @@ public abstract class AbstractMiningCoordinator<
 
   public AbstractMiningCoordinator(
       final Blockchain blockchain,
-      final AbstractMinerExecutor<C, M> executor,
+      final AbstractMinerExecutor<C, M, O> executor,
       final SyncState syncState) {
     this.executor = executor;
     this.blockchain = blockchain;
@@ -193,8 +193,8 @@ public abstract class AbstractMiningCoordinator<
     minedBlockObservers.subscribe(obs);
   }
 
-  @Override
-  public void addEthHashObserver(final EthHashObserver obs) {
+  
+  public void addEthHashObserver(final O obs) {
     ethHashObservers.subscribe(obs);
   }
 

@@ -20,9 +20,11 @@ import org.hyperledger.besu.ethereum.blockcreation.AbstractMiningCoordinator;
 import org.hyperledger.besu.ethereum.chain.Blockchain;
 import org.hyperledger.besu.ethereum.core.BlockHeader;
 import org.hyperledger.besu.ethereum.eth.sync.state.SyncState;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
+import org.hyperledger.besu.ethereum.chain.EthHashObserver;
 
 public class CliqueMiningCoordinator
-    extends AbstractMiningCoordinator<CliqueContext, CliqueBlockMiner> {
+    extends AbstractMiningCoordinator<CliqueContext, CliqueBlockMiner, EthHashObserver, EthHashSolverInputs> {
 
   private final CliqueMiningTracker miningTracker;
 

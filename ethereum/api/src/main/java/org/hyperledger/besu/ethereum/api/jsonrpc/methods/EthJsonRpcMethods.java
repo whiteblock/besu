@@ -65,6 +65,7 @@ import org.hyperledger.besu.ethereum.eth.transactions.TransactionPool;
 import org.hyperledger.besu.ethereum.mainnet.ProtocolSchedule;
 import org.hyperledger.besu.ethereum.p2p.rlpx.wire.Capability;
 import org.hyperledger.besu.ethereum.transaction.TransactionSimulator;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +79,7 @@ public class EthJsonRpcMethods extends ApiGroupJsonRpcMethods {
   private final ProtocolSchedule<?> protocolSchedule;
   private final FilterManager filterManager;
   private final TransactionPool transactionPool;
-  private final MiningCoordinator miningCoordinator;
+  private final MiningCoordinator<EthHashSolverInputs> miningCoordinator;
   private final Set<Capability> supportedCapabilities;
 
   public EthJsonRpcMethods(
@@ -87,7 +88,7 @@ public class EthJsonRpcMethods extends ApiGroupJsonRpcMethods {
       final ProtocolSchedule<?> protocolSchedule,
       final FilterManager filterManager,
       final TransactionPool transactionPool,
-      final MiningCoordinator miningCoordinator,
+      final MiningCoordinator<EthHashSolverInputs> miningCoordinator,
       final Set<Capability> supportedCapabilities) {
     this.blockchainQueries = blockchainQueries;
     this.synchronizer = synchronizer;

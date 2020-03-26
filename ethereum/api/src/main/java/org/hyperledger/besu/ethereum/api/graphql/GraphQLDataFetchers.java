@@ -45,6 +45,7 @@ import org.hyperledger.besu.ethereum.p2p.rlpx.wire.Capability;
 import org.hyperledger.besu.ethereum.rlp.RLP;
 import org.hyperledger.besu.ethereum.rlp.RLPException;
 import org.hyperledger.besu.plugin.data.SyncStatus;
+import org.hyperledger.besu.ethereum.mainnet.EthHashSolverInputs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,7 +116,7 @@ public class GraphQLDataFetchers {
 
   DataFetcher<Optional<Wei>> getGasPriceDataFetcher() {
     return dataFetchingEnvironment -> {
-      final MiningCoordinator miningCoordinator =
+      final MiningCoordinator<EthHashSolverInputs> miningCoordinator =
           ((GraphQLDataFetcherContext) dataFetchingEnvironment.getContext()).getMiningCoordinator();
 
       return Optional.of(miningCoordinator.getMinTransactionGasPrice());
